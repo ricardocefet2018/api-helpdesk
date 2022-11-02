@@ -20,4 +20,8 @@ public class UsuarioService {
     public Usuario cadastro(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
+
+    public Usuario alterarSenha(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
 }

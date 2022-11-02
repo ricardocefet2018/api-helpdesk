@@ -1,13 +1,13 @@
 package com.helpdesk.api.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.*;
 
@@ -18,6 +18,7 @@ import lombok.*;
 @Entity(name = "categoria")
 @Getter
 @Setter
+@JsonInclude(Include.NON_NULL)
 public class Categoria {
 
     @Id

@@ -10,6 +10,8 @@ import com.helpdesk.api.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
+    Optional<Usuario> findAllByUsername(String username);
+
     Optional<Usuario> findByUsernameAndSenha(String username, String senha);
 
 }

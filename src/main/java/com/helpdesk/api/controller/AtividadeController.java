@@ -1,5 +1,7 @@
 package com.helpdesk.api.controller;
 
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +26,7 @@ public class AtividadeController {
         this.atividadeRepository = atividadeRepository;
     }
 
-    @GetMapping("/{idUsuario}/")
+    @GetMapping("/usuario/{idUsuario}/")
     public ResponseEntity<List<Atividade>> list(@PathVariable Long idUsuario) {
         System.out.println("////////////////////////////////////////////////////////////////");
         System.out.println(idUsuario);
@@ -34,12 +36,17 @@ public class AtividadeController {
             List<Atividade> atividades = atividadesOp.get();
             return ResponseEntity.ok().body(atividades);
         } else {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().body(new ArrayList<Atividade>());
         }
     }
 
-    @PostMapping("/")
-    public ResponseEntity create(@RequestBody Atividade atividade) {
-        return ResponseEntity.internalServerError().build();
+    @PostMapping
+    public ResponseEntity<Atividade> create(@RequestBody Atividade atividade) {
+        if (atividade.getId() != null) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            atividade = this.atividadeRepository.save(atividade);
+            return ResponseEntity.status(202).body(atividade);
+        }
     }
 }

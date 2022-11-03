@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -29,6 +31,11 @@ public class Categoria {
     @Column(length = 100)
     private String nome;
 
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    @NonNull
+    private Usuario usuario;
+
     // @OneToMany(mappedBy = "categoria")
     // private List<Atividade> atividades;
 
@@ -37,5 +44,10 @@ public class Categoria {
 
     // TO-DO
     // private String local;
+
+    public Categoria(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
 }

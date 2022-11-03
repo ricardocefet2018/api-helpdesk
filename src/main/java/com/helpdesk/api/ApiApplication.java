@@ -41,9 +41,10 @@ public class ApiApplication implements ApplicationRunner {
 		System.out.println(u1);
 		System.out.println(u2);
 
-		Categoria prova = new Categoria("Prova");
-		Categoria trabalho = new Categoria("Trabalho");
-		Categoria tarefa = new Categoria("Tarefa");
+		Categoria prova = new Categoria("Prova", u1);
+		Categoria trabalho = new Categoria("Trabalho", u1);
+		Categoria tarefa = new Categoria("Tarefa", u2);
+
 		prova = categoriaRepository.save(prova);
 		trabalho = categoriaRepository.save(trabalho);
 		tarefa = categoriaRepository.save(tarefa);

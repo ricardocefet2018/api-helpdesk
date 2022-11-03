@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/categoria")
@@ -38,7 +39,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> create(Categoria categoria) {
+    public ResponseEntity<Categoria> create(@RequestBody Categoria categoria) {
         if (categoria.getId() != null) {
             return ResponseEntity.badRequest().build();
         } else {
@@ -47,8 +48,8 @@ public class CategoriaController {
         }
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<Categoria> delete(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Categoria> delete(@PathVariable Long id) {
         this.categoriaRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

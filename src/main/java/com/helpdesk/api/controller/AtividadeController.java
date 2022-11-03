@@ -7,9 +7,11 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -48,5 +50,21 @@ public class AtividadeController {
             atividade = this.atividadeRepository.save(atividade);
             return ResponseEntity.status(202).body(atividade);
         }
+    }
+
+    @PutMapping
+    public ResponseEntity<Atividade> edit(@RequestBody Atividade atividade) {
+        if (atividade.getId() == null) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            atividade = this.atividadeRepository.save(atividade);
+            return ResponseEntity.ok().body(atividade);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Atividade> delete(@PathVariable Long id) {
+        this.atividadeRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

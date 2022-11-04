@@ -25,4 +25,11 @@ public interface AtividadeRepository extends JpaRepository<Atividade, Long> {
 
     @Query("SELECT new com.helpdesk.api.model.Atividade(a.id, a.titulo, a.dtInicio, a.dtFinal, a.prioridade, a.dificuldade, a.categoria) FROM atividade a WHERE a.usuario.id = :id")
     public Optional<List<Atividade>> findAtividadesByUsuarioId(@Param("id") Long id);
+
+    @Query("SELECT new com.helpdesk.api.model.Atividade(a.id, a.titulo, a.dtInicio, a.dtFinal, a.prioridade, a.dificuldade, a.categoria) FROM atividade a WHERE a.id = :id")
+    public Optional<Atividade> findById(@Param("id") Long id);
+
+    @Query("SELECT new com.helpdesk.api.model.Atividade(a.id, a.titulo, a.dtInicio, a.dtFinal, a.prioridade, a.dificuldade, a.categoria) FROM atividade a WHERE a.id = :id AND a.usuario.id = :idUsuario")
+    public Optional<Atividade> findByIdAndUsuarioId(@Param("id") Long id, @Param("idUsuario") Long idUsuario);
+
 }

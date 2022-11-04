@@ -28,17 +28,25 @@ public class AtividadeController {
         this.atividadeRepository = atividadeRepository;
     }
 
-    @GetMapping("/usuario/{idUsuario}/")
+    @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<List<Atividade>> list(@PathVariable Long idUsuario) {
-        System.out.println("////////////////////////////////////////////////////////////////");
-        System.out.println(idUsuario);
-        System.out.println("////////////////////////////////////////////////////////////////");
         Optional<List<Atividade>> atividadesOp = this.atividadeRepository.findAtividadesByUsuarioId(idUsuario);
         if (atividadesOp.isPresent()) {
             List<Atividade> atividades = atividadesOp.get();
             return ResponseEntity.ok().body(atividades);
         } else {
             return ResponseEntity.ok().body(new ArrayList<Atividade>());
+        }
+    }
+
+    @GetMapping("/{id}/usuario/{idUsuario}")
+    public ResponseEntity<Atividade> getAtividade(@PathVariable Long id, @PathVariable Long idUsuario) {
+        Optional<Atividade> atividadeOp = this.atividadeRepository.findByIdAndUsuarioId(id, idUsuario);
+        if (atividadeOp.isPresent()) {
+            Atividade atividade = atividadeOp.get();
+            return ResponseEntity.ok().body(atividade);
+        } else {
+            return ResponseEntity.noContent().build();
         }
     }
 
@@ -58,6 +66,7 @@ public class AtividadeController {
             return ResponseEntity.badRequest().build();
         } else {
             atividade = this.atividadeRepository.save(atividade);
+            atividade = this.atividadeRepository.findById(atividade.getId()).get();
             return ResponseEntity.ok().body(atividade);
         }
     }

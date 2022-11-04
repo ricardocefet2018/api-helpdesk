@@ -38,6 +38,17 @@ public class CategoriaController {
         }
     }
 
+    @GetMapping("/{id}/usuario/{idUsuario}")
+    public ResponseEntity<Categoria> getCategoria(@PathVariable Long id, @PathVariable Long idUsuario) {
+        Optional<Categoria> categoriaOp = this.categoriaRepository.findByIdAndUsuarioId(id, idUsuario);
+        if (categoriaOp.isPresent()) {
+            Categoria categoria = categoriaOp.get();
+            return ResponseEntity.ok().body(categoria);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Categoria> create(@RequestBody Categoria categoria) {
         if (categoria.getId() != null) {

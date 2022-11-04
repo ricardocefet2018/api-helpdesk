@@ -18,9 +18,9 @@ public class AtividadeService {
 
     // @Query("SELECT a.id, a.titulo, a.dtInicio, a.dtFinal, a.prioridade,
     // a.dificuldade, a.categoria FROM atividade a WHERE a.usuario.id = ?1")
-    public Optional<List<Atividade>> findAtividadeByUsuarioId(Long idUsuario) {
+    // public Optional<List<Atividade>> findAtividadeByUsuarioId(Long idUsuario) {
 
-        return atividadeRepository.findAtividadesByUsuarioId(idUsuario);
-    }
+    // return atividadeRepository.findAtividadesByUsuarioId(idUsuario);
+    // }
 
 }
